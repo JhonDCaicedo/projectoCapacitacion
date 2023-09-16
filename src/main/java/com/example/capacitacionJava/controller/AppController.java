@@ -11,6 +11,7 @@ import java.util.Date;
 public class AppController {
 
     private ArrayList<Ability> listAbility = new ArrayList();
+    private Person person = new Person();
 
     @GetMapping("/")
     public ModelAndView root(){
@@ -18,7 +19,22 @@ public class AppController {
     }
 
     @GetMapping("/home")
-    public String home(){
+    public String home(Model model){
+        Ability ability1 = new Ability();
+        ability1.setName("Desarallo ETL");
+        ability1.setType("Destreza");
+        ability1.setStatus("Avanzado");
+        ability1.setDate("2015/11/15");
+
+        listAbility.add(ability1);
+
+
+        person.setName("Jhon David");
+        person.setLastName("Caicedo Alvarez");
+        person.setEmail("jhon-caicedot@gtccorporation.com");
+        person.setGender("Masculino");
+        model.addAttribute("person", person);
+        model.addAttribute("listAbility", listAbility);
         return "home";
     }
 
@@ -28,7 +44,8 @@ public class AppController {
     }
 
     @GetMapping("/data")
-    public String data(){
+    public String data(Model model){
+        model.addAttribute("person", person);
         return "data";
     }
 
